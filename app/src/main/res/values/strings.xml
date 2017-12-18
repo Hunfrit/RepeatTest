@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RepeatTest</string>
+    <string name="BarText">Exchange rates history</string>
+    <string name="USDtoUAH">1 EUR to UAH</string>
+</resources>
