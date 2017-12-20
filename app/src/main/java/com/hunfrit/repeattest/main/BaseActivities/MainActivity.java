@@ -1,6 +1,5 @@
 package com.hunfrit.repeattest.main.BaseActivities;
 
-import android.media.MediaDataSource;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -28,8 +27,6 @@ public class MainActivity extends AppCompatActivity implements MainView{
     private RateForTodayPresenter mRateForTodayPresenter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
-    private ApiRetrofit mApi;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,18 +37,18 @@ public class MainActivity extends AppCompatActivity implements MainView{
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         mRateForTodayPresenter = new RateForTodayPresenter(this);
-        mRateForTodayPresenter.getValue(mApi.getRetrofit());
+        mRateForTodayPresenter.getValue(ApiRetrofit.getRetrofit());
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                falseRefreshing();
+                stopRefreshing();
                 hideElements();
-                mRateForTodayPresenter = new RateForTodayPresenter(MainActivity.this);
-                mRateForTodayPresenter.getValue(mApi.getRetrofit());
+                mRateForTodayPresenter.getValue(ApiRetrofit.getRetrofit());
             }
         });
+
     }
 
     @Override
@@ -64,9 +61,11 @@ public class MainActivity extends AppCompatActivity implements MainView{
 
     @Override
     public void showError(boolean check, int index) {
-        mSwipeRefreshLayout.setRefreshing(false);
-        mRate.setText("ERROR");
-        mDate.setText("ERROR");
+        if(check){
+            mSwipeRefreshLayout.setRefreshing(false);
+            mRate.setText("ERROR");
+            mDate.setText("ERROR");
+        }
     }
 
     public void showElements(){
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
         mProgressBar.setVisibility(View.VISIBLE);
     }
 
-    public void falseRefreshing(){
+    public void stopRefreshing(){
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

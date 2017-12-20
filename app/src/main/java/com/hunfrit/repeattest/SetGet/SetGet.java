@@ -17,9 +17,9 @@ public class SetGet {
         @SerializedName("rate")
         @Expose
         private Float rate;
-        @SerializedName("cc")
+        @SerializedName("currency")
         @Expose
-        private String cc;
+        private String currency;
         @SerializedName("exchangedate")
         @Expose
 
@@ -48,12 +48,12 @@ public class SetGet {
             this.rate = rate;
         }
 
-        public String getCc() {
-            return cc;
+        public String getCurrency() {
+            return currency;
         }
 
-        public void setCc(String cc) {
-            this.cc = cc;
+        public void setCurrency(String cc) {
+            this.currency = currency;
         }
 
         public String getExchangedate() {
