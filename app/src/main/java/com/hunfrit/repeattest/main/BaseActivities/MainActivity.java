@@ -1,9 +1,11 @@
 package com.hunfrit.repeattest.main.BaseActivities;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -65,6 +67,8 @@ public class MainActivity extends AppCompatActivity implements MainView{
             mSwipeRefreshLayout.setRefreshing(false);
             mRate.setText("ERROR");
             mDate.setText("ERROR");
+
+            showCustomDialog(index);
         }
     }
 
@@ -88,5 +92,35 @@ public class MainActivity extends AppCompatActivity implements MainView{
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         }, 1000);
+    }
+
+    public void showCustomDialog(int number){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        switch (number){
+            case 505:   builder.setTitle("Error")
+                                    .setMessage("Problem with server")
+                                    .setIcon(R.mipmap.ic_launcher)
+                                    .setCancelable(false)
+                                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                        }
+                                    });
+                                    break;
+            case 404:   builder.setTitle("Error")
+                                    .setMessage("Problem with internet")
+                                    .setIcon(R.mipmap.ic_launcher)
+                                    .setCancelable(false)
+                                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                        }
+                                    });
+                                    break;
+        }
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
