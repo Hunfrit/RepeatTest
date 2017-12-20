@@ -65,8 +65,10 @@ public class MainActivity extends AppCompatActivity implements MainView{
     public void showError(boolean check, int index) {
         if(check){
             mSwipeRefreshLayout.setRefreshing(false);
+
             mRate.setText("ERROR");
             mDate.setText("ERROR");
+            showElements();
 
             showCustomDialog(index);
         }

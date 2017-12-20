@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/LL1"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="200dp"
         android:background="#13dc13"
         android:orientation="vertical">
 
@@ -26,6 +26,16 @@
             android:id="@+id/ImageFragment"
             android:name="com.hunfrit.repeattest.Fragments.FragmentImage"
             tools:layout="@layout/fragment_image"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="#13dc13"
+            android:text="TODAY"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:gravity="center_horizontal"/>
     </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
